@@ -70,6 +70,7 @@ module.exports = new EntitySchema({
     product_categories: {
       target: 'product_categories',
       type: 'many-to-one',
+      inverseSide: 'products',
       joinColumn: {
         name: 'product_categories_id',
         referencedColumnName: 'id',
@@ -84,6 +85,17 @@ module.exports = new EntitySchema({
         name: 'id',
         referencedColumnName: 'products_id',
         foreignKeyConstraintName: 'products_fk_product_link_tags'
+      },
+      cascade: false
+    },
+    order_link_products: {
+      target: 'order_link_products',
+      type: 'one-to-many',
+      inverseSide: 'products',
+      joinColumn: {
+        name: 'id',
+        referencedColumnName: 'products_id',
+        foreignKeyConstraintName: 'products_fk_order_link_products'
       },
       cascade: false
     }
