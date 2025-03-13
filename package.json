@@ -10,7 +10,6 @@
     "restart": "docker compose --env-file .env up --force-recreate --build -d",
     "stop": "docker compose --env-file .env stop",
     "clean": "docker compose --env-file .env down -v",
-    "test": "node_modules/.bin/jest",
     "dev": "node ./bin/www.js",
     "test:unit": "node --experimental-vm-modules node_modules/.bin/jest --config ./jest.config.js --coverage --roots ./test/unit",
     "test:integration": "node --experimental-vm-modules node_modules/.bin/jest --testSequencer=./test/sequencer -i --config ./jest.config.js --coverage --roots ./test/integration",
