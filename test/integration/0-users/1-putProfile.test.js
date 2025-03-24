@@ -115,6 +115,8 @@ describe(`PUT ${route}`, () => {
       .expect('Content-Type', /json/)
       .expect(StatusCodes.OK)
     expect(result.body.data.user.name).toEqual(updateUserInfo.name)
+    expect(result.body.data.user.tel).toEqual(updateUserInfo.tel)
+    expect(result.body.data.user.address).toEqual(updateUserInfo.address)
   })
   it('資料庫發生錯誤，回傳HTTP Code 500', async () => {
     const userRepo = dataSource.getRepository('users')

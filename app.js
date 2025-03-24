@@ -36,7 +36,6 @@ app.use('/api/v1/admin', adminRouter)
 app.use('/api/v1/orders', ordersRouter)
 
 app.use((err, req, res, next) => {
-  req.log.error(err)
   if (err.status) {
     res.status(err.status).json({
       message: err.message

@@ -189,10 +189,11 @@ class UsersController {
         return
       }
       const updatedResult = await userRepository.update({
-        id,
-        name: user.name
+        id
       }, {
-        name
+        name,
+        tel,
+        address
       })
       if (updatedResult.affected === 0) {
         res.status(400).json({
@@ -202,7 +203,7 @@ class UsersController {
         return
       }
       const result = await userRepository.findOne({
-        select: ['name'],
+        select: ['name', 'tel', 'address'],
         where: {
           id
         }
@@ -252,7 +253,6 @@ class UsersController {
       if (newPassword !== confirmNewPassword) {
         logger.warn('新密碼與驗證新密碼不一致')
         res.status(400).json({
-
           message: '新密碼與驗證新密碼不一致'
         })
         return
@@ -270,11 +270,11 @@ class UsersController {
         return
       }
       const salt = await bcrypt.genSalt(10)
-      const hashPassword = await bcrypt.hash(password, salt)
+      const newHashPassword = await bcrypt.hash(newPassword, salt)
       const updatedResult = await userRepository.update({
         id
       }, {
-        password: hashPassword
+        password: newHashPassword
       })
       if (updatedResult.affected === 0) {
         res.status(400).json({
@@ -284,8 +284,7 @@ class UsersController {
         return
       }
       res.status(200).json({
-
-        data: null
+        message: '更新成功'
       })
     } catch (error) {
       logger.error('取得使用者資料錯誤:', error)

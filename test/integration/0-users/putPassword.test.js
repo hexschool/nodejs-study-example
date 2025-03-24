@@ -242,7 +242,7 @@ describe(`PUT ${route}`, () => {
       .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(StatusCodes.OK)
-    expect(result.body.data).toBe(null)
+    expect(result.body.message).toEqual('更新成功')
   })
   it('資料庫發生錯誤，回傳HTTP Code 500', async () => {
     const userRepo = dataSource.getRepository('users')
